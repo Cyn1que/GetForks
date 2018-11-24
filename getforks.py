@@ -14,6 +14,7 @@ environment_token_var = 'GITHUB_TOKEN'
 def get_repos_forks(repo_adress: str, authentication: (str, str)):
     repo_fork_core = re.sub(
         '(http)?(s)?(:\/\/)?(www.)?github.com/', '', repo_adress).rstrip('/')
+        
     repo_fork_endpoint = github_general_endpoint + repo_fork_core + forks_endpoint
     print('Requesting data from: {}'.format(repo_fork_endpoint))
     r = requests.get(repo_fork_endpoint, auth=authentication)
@@ -42,7 +43,7 @@ def print_usage():
     For public repos, github auth isn't required.
     For private ones, either provide both your username and password, use only username and wait for password prompt
         or create special access token as outlined here: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
-        and save it enviromental variable called {}, which is automatically read in case password isn't provided but username is.
+        and save it enviromental variable called {}. This variable will be automatically read in case password isn't provided but username is.
 
     Format of <original-repo-url> can either be an URL, or just an URI in format of <owner-name>/<repo-name>'''.format(environment_token_var))
 
